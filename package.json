@@ -1,0 +1,71 @@
+{
+  "name": "react-ts",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@apollo/react-hooks": "^3.0.1",
+    "@types/jest": "24.0.18",
+    "@types/node": "12.7.11",
+    "@types/react": "16.9.5",
+    "@types/react-dom": "16.9.1",
+    "apollo-boost": "^0.4.4",
+    "graphql": "^14.5.3",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.2.0",
+    "typescript": "3.6.3"
+  },
+  "scripts": {
+    "start": "concurrently \"react-scripts start\" \"npm run generate:schema -- --watch\"",
+    "prebuild": "npm run generate:schema",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "postinstall": "npm run generate:schema",
+    "generate:schema": "graphql-codegen --config codegen.yml"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "browserslist": {
+    "production": [
+      ">0.1%",
+      "not ie 11",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^1.6.1",
+    "@graphql-codegen/typescript": "1.8.1",
+    "@graphql-codegen/typescript-operations": "1.8.1",
+    "@graphql-codegen/typescript-react-apollo": "^1.7.0",
+    "@types/graphql": "^14.2.3",
+    "concurrently": "^5.0.0",
+    "husky": "^3.0.4",
+    "lint-staged": "^9.2.4",
+    "prettier": "^1.18.2",
+    "typesync": "^0.6.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,json,md,ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
