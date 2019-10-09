@@ -1,20 +1,8 @@
 import React from 'react'
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
-import { Query } from 'generated/graphql'
-
-const FETCH_FEED = gql`
-  query feed {
-    feed {
-      id
-      title
-      content
-    }
-  }
-`
+import { useFeedQuery } from 'generated/graphql'
 
 const App: React.FC = () => {
-  const { loading, data } = useQuery<Query>(FETCH_FEED)
+  const { loading, data } = useFeedQuery()
 
   if (loading) return <div>Loading...</div>
 
@@ -29,7 +17,18 @@ const App: React.FC = () => {
                 <li>
                   <strong>Title:</strong> {post.title}
                   <br />
-                  <strong>Content:</strong> {post.content} <br />
+                  {post.content && (
+                    <>
+                      <strong>Content:</strong>{' '}
+                      <a
+                        href={post.content}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {post.content}
+                      </a>
+                    </>
+                  )}
                 </li>
                 <br />
               </React.Fragment>
